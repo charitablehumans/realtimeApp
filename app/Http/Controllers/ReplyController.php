@@ -6,6 +6,7 @@ use App\Model\Reply;
 use App\Model\Question;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\ReplyResource;
 
 class ReplyController extends Controller
 {
@@ -16,7 +17,7 @@ class ReplyController extends Controller
      */
     public function index(Question $question)
     {
-        return $question->replies;
+        return ReplyResource::collection($question->replies);
 
         // return Reply::latest()->get();
     }
@@ -41,7 +42,7 @@ class ReplyController extends Controller
     {
         $reply = $question->replies()->create($request->all());
 
-        return response(['reply' => $reply], Response::HTTP_CREATED);
+        return response(['reply' => new ReplyResource($reply)], Response::HTTP_CREATED);
 
     }
 
@@ -53,7 +54,7 @@ class ReplyController extends Controller
      */
     public function show(Question $question, Reply $reply)
     {
-        return $reply;
+        return new ReplyResource($reply);
     }
 
     /**
