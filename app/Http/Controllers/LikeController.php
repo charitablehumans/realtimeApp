@@ -8,6 +8,16 @@ use App\Model\Reply;
 
 class LikeController extends Controller
 {
+    /**
+     * Create a new LikeController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('jwt');
+    }
+
     public function likeIt(Reply $reply)
     {
         $reply->likes()->create([

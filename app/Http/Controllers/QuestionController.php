@@ -10,6 +10,16 @@ use App\Http\Resources\QuestionResource;
 class QuestionController extends Controller
 {
     /**
+     * Create a new QuestionController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
