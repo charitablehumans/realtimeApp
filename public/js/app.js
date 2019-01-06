@@ -74651,7 +74651,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -74716,6 +74716,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         password: null
       }
     };
+  },
+
+  methods: {
+    login: function login() {
+      //   alert("login");
+      axios.post("/api/auth/login", this.form).then(function (res) {
+        return console.log(res.data);
+      }).catch(function (error) {
+        return console.log(error.response.data);
+      });
+    }
   }
 });
 
@@ -74733,12 +74744,11 @@ var render = function() {
       _c(
         "v-form",
         {
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
+            }
           }
         },
         [
