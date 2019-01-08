@@ -16,6 +16,38 @@ class User {
             AppStorage.store(username, access_token);
         }
     }
+
+    hasToken() {
+        const storedToken = AppStorage.getToken();
+        // console.log(storedToken);
+        if (storedToken) {
+            return Token.isValid(storedToken) ? true : false;
+        }
+
+        return false;
+    }
+
+    loggedIn() {
+        return this.hasToken();
+    }
+
+    logout() {
+        AppStorage.clear();
+    }
+
+    name() {
+        if (this.loggedIn()) {
+            return AppStorage.getUser();
+        }
+    }
+
+    id() {
+        if (this.loggedIn()) {
+            const payload = Token.payload(AppStorage.getToken());
+
+            return payload.sub;
+        }
+    }
 }
 
 export default (User = new User());

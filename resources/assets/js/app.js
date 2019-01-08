@@ -16,6 +16,9 @@ import router from "./Router/router.js";
 Vue.use(Vuetify);
 
 window.User = User;
+// console.log(User.loggedIn());
+// User.logout();
+console.log(User.id());
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
