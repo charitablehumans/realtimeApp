@@ -23,6 +23,9 @@ export default {
       }
     };
   },
+  created() {
+    if (User.loggedIn()) this.$router.push({ name: "forum" });
+  },
   methods: {
     login() {
       //   alert("login");
