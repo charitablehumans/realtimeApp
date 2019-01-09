@@ -18,7 +18,8 @@ Vue.use(Vuetify);
 window.User = User;
 // console.log(User.loggedIn());
 // User.logout();
-console.log(User.loggedIn());
+// console.log(User.loggedIn());
+window.EventBus = new Vue();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

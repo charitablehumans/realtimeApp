@@ -30,7 +30,7 @@ export default {
     login() {
       //   alert("login");
       User.login(this.form);
-      this.$router.push({ name: "forum" });
+      // this.$router.push({ name: "forum" });
     }
   }
 };
