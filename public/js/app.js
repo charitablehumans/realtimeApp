@@ -25521,7 +25521,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuet
 window.User = __WEBPACK_IMPORTED_MODULE_2__Helpers_User__["a" /* default */];
 // console.log(User.loggedIn());
 // User.logout();
-console.log(__WEBPACK_IMPORTED_MODULE_2__Helpers_User__["a" /* default */].id());
+console.log(__WEBPACK_IMPORTED_MODULE_2__Helpers_User__["a" /* default */].loggedIn());
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -72127,8 +72127,9 @@ var Token = function () {
         key: "isValid",
         value: function isValid(token) {
             var payload = this.payload(token);
+            // console.log(payload.iss);
             if (payload) {
-                return payload.iss == "http://realtimeapp.test/api/auth/login" ? true : false;
+                return payload.iss == "http://realtimeapp.test/api/auth/login" || "http://realtimeapp.test/api/auth/signup" ? true : false;
             }
 
             return false;
