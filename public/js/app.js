@@ -38020,14 +38020,16 @@ module.exports = __webpack_require__(123);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_simplemde__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_simplemde___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_simplemde__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Helpers_User__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router_router_js__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_marked__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_marked___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_marked__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_simplemde__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_simplemde___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_simplemde__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Helpers_User__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router_router_js__ = __webpack_require__(68);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -38044,14 +38046,16 @@ window.Vue = __webpack_require__(6);
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_simplemde___default.a);
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
 
-window.User = __WEBPACK_IMPORTED_MODULE_3__Helpers_User__["a" /* default */];
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_simplemde___default.a);
+window.md = __WEBPACK_IMPORTED_MODULE_0_marked___default.a;
+
+window.User = __WEBPACK_IMPORTED_MODULE_4__Helpers_User__["a" /* default */];
 // console.log(User.loggedIn());
 // User.logout();
-window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+window.EventBus = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38059,11 +38063,11 @@ window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component("AppHome", __webpack_require__(108));
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.component("AppHome", __webpack_require__(108));
 
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
   el: "#app",
-  router: __WEBPACK_IMPORTED_MODULE_4__Router_router_js__["a" /* default */]
+  router: __WEBPACK_IMPORTED_MODULE_5__Router_router_js__["a" /* default */]
 });
 
 /***/ }),
@@ -93436,7 +93440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       axios.post("/api/question", this.form).then(function (res) {
-        return console.log(res.data);
+        return _this2.$router.push(res.data.path);
       }).catch(function (error) {
         return _this2.errors = error.response.data.error;
       });
@@ -93973,7 +93977,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: { ShowQuestion: __WEBPACK_IMPORTED_MODULE_0__ShowQuestion___default.a },
   data: function data() {
     return {
-      question: {}
+      question: null
     };
   },
   created: function created() {
@@ -94072,7 +94076,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94101,7 +94105,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["data"]
+  props: ["data"],
+  computed: {
+    body: function body() {
+      return md.parse(this.data.body);
+    }
+  }
 });
 
 /***/ }),
@@ -94143,7 +94152,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-card-text", { domProps: { innerHTML: _vm._s(_vm.data.body) } })
+          _c("v-card-text", { domProps: { innerHTML: _vm._s(_vm.body) } })
         ],
         1
       )
@@ -94169,7 +94178,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("show-question", { attrs: { data: _vm.question } })
+  return _vm.question
+    ? _c("show-question", { attrs: { data: _vm.question } })
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

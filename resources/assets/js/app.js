@@ -8,6 +8,7 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+import md from "marked";
 import Vue from "vue";
 import VueSimplemde from "vue-simplemde";
 import Vuetify from "vuetify";
@@ -17,6 +18,7 @@ import router from "./Router/router.js";
 Vue.use(Vuetify);
 
 Vue.use(VueSimplemde);
+window.md = md;
 
 window.User = User;
 // console.log(User.loggedIn());
