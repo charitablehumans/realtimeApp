@@ -9,11 +9,14 @@ require("./bootstrap");
 window.Vue = require("vue");
 
 import Vue from "vue";
+import VueSimplemde from "vue-simplemde";
 import Vuetify from "vuetify";
 import User from "./Helpers/User";
 import router from "./Router/router.js";
 
 Vue.use(Vuetify);
+
+Vue.use(VueSimplemde);
 
 window.User = User;
 // console.log(User.loggedIn());
