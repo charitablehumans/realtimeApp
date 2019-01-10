@@ -10,6 +10,20 @@ class Question extends Model
     // protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
     protected $guarded = [];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($question) {
+            $question->slug = str_slug($question->title);
+        });
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
