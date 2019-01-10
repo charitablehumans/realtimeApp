@@ -21,7 +21,6 @@ Vue.use(VueSimplemde);
 window.User = User;
 // console.log(User.loggedIn());
 // User.logout();
-// console.log(User.loggedIn());
 window.EventBus = new Vue();
 
 /**

@@ -39,7 +39,7 @@ export default {
       axios
         .post("/api/question", this.form)
         .then(res => console.log(res.data))
-        .catch(error => (this.errors = error.response.data));
+        .catch(error => (this.errors = error.response.data.error));
     }
   }
 };
