@@ -94081,7 +94081,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94128,6 +94128,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     body: function body() {
       return md.parse(this.data.body);
+    }
+  },
+  methods: {
+    destroy: function destroy() {
+      var _this = this;
+
+      axios.delete("/api/question/" + this.data.slug).then(function (res) {
+        return _this.$router.push("/forum");
+      }).catch(function (error) {
+        return console.log(error.response.data);
+      });
     }
   }
 });
@@ -94190,7 +94201,10 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-btn",
-                    { attrs: { icon: "", small: "" } },
+                    {
+                      attrs: { icon: "", small: "" },
+                      on: { click: _vm.destroy }
+                    },
                     [
                       _c("v-icon", { attrs: { color: "red" } }, [
                         _vm._v("delete")

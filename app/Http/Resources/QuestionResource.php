@@ -17,6 +17,7 @@ class QuestionResource extends JsonResource
         // return parent::toArray($request);
         return [
             'title' => $this->title,
+            'slug' => $this->slug,
             'path' => $this->path,
             'body' => $this->body,
             'created_at' => $this->created_at->diffForHumans(),
