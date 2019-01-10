@@ -11,7 +11,7 @@
       </v-card-title>
       <v-card-text v-html="body"></v-card-text>
       <v-card-actions v-if="own">
-        <v-btn icon small>
+        <v-btn icon small @click="edit">
           <v-icon color="orange">edit</v-icon>
         </v-btn>
         <v-btn icon small @click="destroy">
@@ -41,6 +41,9 @@ export default {
         .delete(`/api/question/${this.data.slug}`)
         .then(res => this.$router.push("/forum"))
         .catch(error => console.log(error.response.data));
+    },
+    edit() {
+      EventBus.$emit("startEditing");
     }
   }
 };
