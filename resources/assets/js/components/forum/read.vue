@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <edit-question v-if="editing"></edit-question>
-    <div v-else>
-      <show-question :data="question" v-if="question"></show-question>
-    </div>
+  <div v-if="question">
+    <edit-question :data="question" v-if="editing"></edit-question>
+    <show-question v-else :data="question"></show-question>
   </div>
 </template>
 
@@ -28,6 +26,10 @@ export default {
     listen() {
       EventBus.$on("startEditing", () => {
         this.editing = true;
+      });
+
+      EventBus.$on("cancelEditing", () => {
+        this.editing = false;
       });
     },
     getQuestion() {

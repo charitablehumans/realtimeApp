@@ -2,13 +2,14 @@
 
 namespace App\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
 
-    // protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
-    protected $guarded = [];
+    protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
+    // protected $guarded = [];
 
     /**
      * The "booting" method of the model.
@@ -31,7 +32,7 @@ class Question extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function replies()
