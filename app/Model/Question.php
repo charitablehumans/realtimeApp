@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
 
-    protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
     // protected $guarded = [];
+    protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
+
+    protected $with = ['replies'];
 
     /**
      * The "booting" method of the model.
