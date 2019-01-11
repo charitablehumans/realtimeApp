@@ -90499,6 +90499,11 @@ var User = function () {
         value: function own(id) {
             return this.id() == id;
         }
+    }, {
+        key: "admin",
+        value: function admin(id) {
+            return this.id() == 22;
+        }
     }]);
 
     return User;
@@ -93358,7 +93363,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -93452,6 +93457,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this = this;
 
+    if (!User.admin()) {
+      this.$router.push("/forum");
+    }
     axios.get("/api/category").then(function (res) {
       return _this.categories = res.data.data;
     });
@@ -95792,11 +95800,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: [{ title: "Forum", to: "/forum", show: true }, { title: "Ask Question", to: "/ask", show: User.loggedIn() }, { title: "Category", to: "/category", show: User.loggedIn() }, { title: "Login", to: "/login", show: !User.loggedIn() }, { title: "Logout", to: "/logout", show: User.loggedIn() }]
+      items: [{ title: "Forum", to: "/forum", show: true }, { title: "Ask Question", to: "/ask", show: User.loggedIn() }, { title: "Category", to: "/category", show: User.admin() }, { title: "Login", to: "/login", show: !User.loggedIn() }, { title: "Logout", to: "/logout", show: User.loggedIn() }]
     };
   },
   created: function created() {
-    EventBus.$on('logout', function () {
+    EventBus.$on("logout", function () {
       User.logout();
     });
   }
