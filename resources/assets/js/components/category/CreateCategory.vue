@@ -3,16 +3,17 @@
     <v-form @submit.prevent="submit">
       <v-text-field label="Category Name" v-model="form.name" required></v-text-field>
 
-      <v-btn type="submit" color="teal">Create</v-btn>
+      <v-btn type="submit" color="pink" v-if="editSlug">Update</v-btn>
+      <v-btn type="submit" color="teal" v-else>Create</v-btn>
       <v-card>
         <v-toolbar color="indigo" dark>
           <v-toolbar-title>Categories</v-toolbar-title>
         </v-toolbar>
         <v-list>
-          <div v-for="category in categories" :key="category.id">
+          <div v-for="(category,index) in categories" :key="category.id">
             <v-list-tile>
               <v-list-tile-action>
-                <v-btn icon small>
+                <v-btn icon small @click="edit(index)">
                   <v-icon color="orange">edit</v-icon>
                 </v-btn>
               </v-list-tile-action>
@@ -20,7 +21,7 @@
                 <v-list-tile-title>{{ category.name }}</v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-btn icon small @click="destroy(category.slug)">
+                <v-btn icon small @click="destroy(category.slug,index)">
                   <v-icon color="red">delete</v-icon>
                 </v-btn>
               </v-list-tile-action>
@@ -40,7 +41,8 @@ export default {
       form: {
         name: null
       },
-      categories: {}
+      categories: {},
+      editSlug: null
     };
   },
   created() {
@@ -48,7 +50,16 @@ export default {
   },
   methods: {
     submit() {
+      this.editSlug ? this.update() : this.create();
+    },
+    create() {
       axios.post("/api/category", this.form).then(res => {
+        this.categories.unshift(res.data);
+        this.form.name = null;
+      });
+    },
+    update() {
+      axios.patch(`/api/category/${this.editSlug}`, this.form).then(res => {
         this.categories.unshift(res.data);
         this.form.name = null;
       });
@@ -57,6 +68,11 @@ export default {
       axios
         .delete(`/api/category/${slug}`)
         .then(res => this.categories.splice(index, 1));
+    },
+    edit(index) {
+      this.form.name = this.categories[index].name;
+      this.editSlug = this.categories[index].slug;
+      this.categories.splice(index, 1);
     }
   }
 };
