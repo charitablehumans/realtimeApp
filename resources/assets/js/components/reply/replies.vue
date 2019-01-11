@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <reply v-for="reply in replies" :key="reply.id" :data="reply"></reply>
+    <reply v-for="reply in replies" :key="reply.id" :data="reply" v-if="replies"></reply>
   </v-container>
 </template>
 
