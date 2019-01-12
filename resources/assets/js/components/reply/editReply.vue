@@ -16,7 +16,14 @@
 export default {
   props: ["reply"],
   methods: {
-    update() {},
+    update() {
+      axios
+        .patch(
+          `/api/question/${this.reply.question_slug}/reply/${this.reply.id}`,
+          { body: this.reply.reply }
+        )
+        .then(res => this.cancel());
+    },
     cancel() {
       EventBus.$emit("cancelEditing");
     }
