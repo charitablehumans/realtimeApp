@@ -95628,7 +95628,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -95658,6 +95658,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+  computed: {
+    color: function color() {
+      return this.liked ? "red" : "red lighten-4";
+    }
+  },
   methods: {
     likeIt: function likeIt() {
       if (User.loggedIn()) {
@@ -95666,10 +95671,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     incr: function incr() {
-      this.count++;
+      var _this = this;
+
+      //   this.count++;
+      axios.post("/api/like/" + this.content.id).then(function (res) {
+        return _this.count++;
+      });
     },
     decr: function decr() {
-      this.count--;
+      var _this2 = this;
+
+      // this.count--;
+      axios.delete("/api/like/" + this.content.id).then(function (res) {
+        return _this2.count--;
+      });
     }
   }
 });
@@ -95689,7 +95704,7 @@ var render = function() {
         "v-btn",
         { attrs: { icon: "" }, on: { click: _vm.likeIt } },
         [
-          _c("v-icon", { attrs: { color: "red" } }, [_vm._v("favorite")]),
+          _c("v-icon", { attrs: { color: _vm.color } }, [_vm._v("favorite")]),
           _vm._v("\n    " + _vm._s(_vm.count) + "\n  ")
         ],
         1

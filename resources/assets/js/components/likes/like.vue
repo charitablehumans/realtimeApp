@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn icon @click="likeIt">
-      <v-icon color="red">favorite</v-icon>
+      <v-icon :color="color">favorite</v-icon>
       {{ count }}
     </v-btn>
   </div>
@@ -16,6 +16,11 @@ export default {
       count: this.content.like_count
     };
   },
+  computed: {
+    color() {
+      return this.liked ? "red" : "red lighten-4";
+    }
+  },
   methods: {
     likeIt() {
       if (User.loggedIn()) {
@@ -24,10 +29,12 @@ export default {
       }
     },
     incr() {
-      this.count++;
+      //   this.count++;
+      axios.post(`/api/like/${this.content.id}`).then(res => this.count++);
     },
     decr() {
-      this.count--;
+      // this.count--;
+      axios.delete(`/api/like/${this.content.id}`).then(res => this.count--);
     }
   }
 };
