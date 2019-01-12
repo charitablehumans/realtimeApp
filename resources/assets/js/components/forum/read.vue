@@ -12,7 +12,7 @@
 
 <script>
 import ShowQuestion from "./ShowQuestion";
-import EditQuestion from "./EditQuestion";
+import EditQuestion from "./editQuestion";
 import Replies from "../reply/replies";
 import NewReply from "../reply/newReply";
 
