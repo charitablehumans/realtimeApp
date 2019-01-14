@@ -105722,7 +105722,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -105757,6 +105757,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.liked ? "red" : "red lighten-4";
     }
   },
+  created: function created() {
+    var _this = this;
+
+    Echo.channel("likeChannel").listen("LikeEvent", function (e) {
+      if (_this.content.id == e.id) {
+        e.type == 1 ? _this.count++ : _this.count--;
+      }
+    });
+  },
+
   methods: {
     likeIt: function likeIt() {
       if (User.loggedIn()) {
@@ -105765,19 +105775,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     incr: function incr() {
-      var _this = this;
+      var _this2 = this;
 
       //   this.count++;
       axios.post("/api/like/" + this.content.id).then(function (res) {
-        return _this.count++;
+        return _this2.count++;
       });
     },
     decr: function decr() {
-      var _this2 = this;
+      var _this3 = this;
 
       // this.count--;
       axios.delete("/api/like/" + this.content.id).then(function (res) {
-        return _this2.count--;
+        return _this3.count--;
       });
     }
   }
