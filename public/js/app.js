@@ -105229,7 +105229,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -105277,6 +105277,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
 
         _this.content.splice(index, 1);
+      });
+
+      Echo.private("App.User." + User.id()).notification(function (notification) {
+        console.log(notification.type);
       });
     }
   }
