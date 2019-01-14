@@ -38132,7 +38132,12 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */](
     broadcaster: "pusher",
     key: "6852c5c54bb3c537c6e1",
     cluster: "us2",
-    encrypted: true
+    encrypted: true,
+    auth: {
+        headers: {
+            Authorization: JwtToken
+        }
+    }
 });
 
 /***/ }),
@@ -105229,7 +105234,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -105280,7 +105285,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
 
       Echo.private("App.User." + User.id()).notification(function (notification) {
-        console.log(notification.type);
+        // console.log(notification.type);
+        _this.content.unshift(notification.reply);
       });
     }
   }
