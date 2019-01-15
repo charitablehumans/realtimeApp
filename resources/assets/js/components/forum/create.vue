@@ -13,7 +13,7 @@
 
       <markdown-editor v-model="form.body"></markdown-editor>
 
-      <v-btn color="green" type="submit">Create</v-btn>
+      <v-btn color="green" type="submit" :disabled="disable">Create</v-btn>
     </v-form>
   </v-container>
 </template>
@@ -40,6 +40,11 @@ export default {
         .post("/api/question", this.form)
         .then(res => this.$router.push(res.data.path))
         .catch(error => (this.errors = error.response.data.error));
+    }
+  },
+  computed: {
+    disable() {
+      return !(this.form.title && this.form.body && this.form.category_id);
     }
   }
 };
