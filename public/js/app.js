@@ -104812,7 +104812,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -104852,7 +104852,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ["data"],
   data: function data() {
     return {
-      own: User.own(this.data.user_id)
+      own: User.own(this.data.user_id),
+      replyCount: this.data.reply_count
     };
   },
 
@@ -104861,12 +104862,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return md.parse(this.data.body);
     }
   },
+  created: function created() {
+    var _this = this;
+
+    EventBus.$on("newReply", function () {
+      _this.replyCount++;
+    });
+
+    Echo.private("App.User." + User.id()).notification(function (notification) {
+      _this.replyCount++;
+    });
+
+    EventBus.$on("deleteReply", function () {
+      _this.replyCount--;
+    });
+
+    Echo.channel("deleteReplyChannel").listen("DeleteReplyEvent", function (e) {
+      _this.replyCount--;
+    });
+  },
+
   methods: {
     destroy: function destroy() {
-      var _this = this;
+      var _this2 = this;
 
       axios.delete("/api/question/" + this.data.slug).then(function (res) {
-        return _this.$router.push("/forum");
+        return _this2.$router.push("/forum");
       }).catch(function (error) {
         return console.log(error.response.data);
       });
@@ -104912,7 +104933,7 @@ var render = function() {
               _c("v-spacer"),
               _vm._v(" "),
               _c("v-btn", { attrs: { color: "teal", dark: "" } }, [
-                _vm._v(_vm._s(_vm.data.reply_count) + " Replies")
+                _vm._v(_vm._s(_vm.replyCount) + " Replies")
               ])
             ],
             1
