@@ -107341,7 +107341,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -107380,7 +107380,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       read: {},
       unread: {},
-      unreadCount: 0
+      unreadCount: 0,
+      sound: "http://soundbible.com/mp3/glass_ping-Go445-1207030150.mp3"
     };
   },
   created: function created() {
@@ -107390,12 +107391,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.getNotifications();
     }
     Echo.private("App.User." + User.id()).notification(function (notification) {
+      // console.log("hello");
+      _this.playSound();
       _this.unread.unshift(notification);
       _this.unreadCount++;
     });
   },
 
   methods: {
+    playSound: function playSound() {
+      var alert = new Audio(this.sound);
+      alert.play();
+    },
     getNotifications: function getNotifications() {
       var _this2 = this;
 
