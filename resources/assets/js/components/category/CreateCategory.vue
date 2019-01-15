@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-alert v-if="errors" :value="true" type="error">Please give category name</v-alert>
     <v-form @submit.prevent="submit">
       <v-text-field label="Category Name" v-model="form.name" required></v-text-field>
 
@@ -42,7 +43,8 @@ export default {
         name: null
       },
       categories: {},
-      editSlug: null
+      editSlug: null,
+      errors: null
     };
   },
   created() {
@@ -56,10 +58,13 @@ export default {
       this.editSlug ? this.update() : this.create();
     },
     create() {
-      axios.post("/api/category", this.form).then(res => {
-        this.categories.unshift(res.data);
-        this.form.name = null;
-      });
+      axios
+        .post("/api/category", this.form)
+        .then(res => {
+          this.categories.unshift(res.data);
+          this.form.name = null;
+        })
+        .catch(error => (this.errors = error.response.data.errors));
     },
     update() {
       axios.patch(`/api/category/${this.editSlug}`, this.form).then(res => {
@@ -80,7 +85,7 @@ export default {
   },
   computed: {
     disabled() {
-      // return !this.form.name;
+      return !this.form.name;
     }
   }
 };
