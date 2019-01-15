@@ -38001,7 +38001,7 @@ var User = function () {
             var storedToken = __WEBPACK_IMPORTED_MODULE_0__AppStorage__["a" /* default */].getToken();
             // console.log(storedToken);
             if (storedToken) {
-                return __WEBPACK_IMPORTED_MODULE_1__Token__["a" /* default */].isValid(storedToken) ? true : false;
+                return __WEBPACK_IMPORTED_MODULE_1__Token__["a" /* default */].isValid(storedToken) ? true : this.logout();
             }
 
             return false;
