@@ -38028,8 +38028,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_simplemde___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_simplemde__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Helpers_User__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router_router_js__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Helpers_Exception__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Helpers_User__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Router_router_js__ = __webpack_require__(70);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -38047,12 +38048,15 @@ window.Vue = __webpack_require__(6);
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuetify___default.a);
 
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_simplemde___default.a);
 window.md = __WEBPACK_IMPORTED_MODULE_0_marked___default.a;
 
-window.User = __WEBPACK_IMPORTED_MODULE_4__Helpers_User__["a" /* default */];
+window.User = __WEBPACK_IMPORTED_MODULE_5__Helpers_User__["a" /* default */];
+
+window.Exception = __WEBPACK_IMPORTED_MODULE_4__Helpers_Exception__["a" /* default */];
 // console.log(User.loggedIn());
 // User.logout();
 window.EventBus = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a();
@@ -38067,7 +38071,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.component("AppHome", __webpack_requi
 
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
   el: "#app",
-  router: __WEBPACK_IMPORTED_MODULE_5__Router_router_js__["a" /* default */]
+  router: __WEBPACK_IMPORTED_MODULE_6__Router_router_js__["a" /* default */]
 });
 
 /***/ }),
@@ -107026,7 +107030,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -107088,6 +107092,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.read = res.data.read;
         _this2.unread = res.data.unread;
         _this2.unreadCount = res.data.unread.length;
+      }).catch(function (error) {
+        return Exception.handle(error);
       });
     },
     readIt: function readIt(notification) {
@@ -107418,6 +107424,47 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__User__ = __webpack_require__(67);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Exception = function () {
+    function Exception() {
+        _classCallCheck(this, Exception);
+    }
+
+    _createClass(Exception, [{
+        key: "handle",
+        value: function handle(error) {
+            this.isExpired(error.response.data.error);
+        }
+    }, {
+        key: "isExpired",
+        value: function isExpired(error) {
+            if (error == "Token is invalid") {
+                __WEBPACK_IMPORTED_MODULE_0__User__["a" /* default */].logout();
+            }
+        }
+    }]);
+
+    return Exception;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Exception = new Exception());
 
 /***/ })
 /******/ ]);

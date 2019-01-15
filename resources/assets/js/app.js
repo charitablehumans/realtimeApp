@@ -12,6 +12,7 @@ import md from "marked";
 import Vue from "vue";
 import VueSimplemde from "vue-simplemde";
 import Vuetify from "vuetify";
+import Exception from "./Helpers/Exception";
 import User from "./Helpers/User";
 import router from "./Router/router.js";
 
@@ -21,6 +22,8 @@ Vue.use(VueSimplemde);
 window.md = md;
 
 window.User = User;
+
+window.Exception = Exception;
 // console.log(User.loggedIn());
 // User.logout();
 window.EventBus = new Vue();
